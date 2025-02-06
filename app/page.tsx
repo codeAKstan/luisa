@@ -50,9 +50,10 @@ export default function Valentine() {
     setLoading(true);
     setRaining(true);
     if (audio) {
-      audio.pause(); // Stop first song
+      audio.pause(); // Stop the first song
     }
     const newMusic = new Audio('/new-song.mp3'); // Play new song
+    newMusic.loop = true; // Set the new song to loop
     newMusic.play().catch(err => console.log("Autoplay blocked:", err));
     setAudio(newMusic);
 
