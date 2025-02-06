@@ -6,11 +6,11 @@ const messages = [
   { text: "Heyyyyy, pretty girl.", emoji: "👋", image: "one.png" },
   { text: "Recently, we met. And somehow, you've been on my mind ever since.", emoji: "📅", image: "two.png" },
   { text: "You're beautiful, you're smart, you're fun, and you make spending time together feel too short.", emoji: "✨", image: "four.png" },
-  { text: "I look forward to when I'll see you again, hold your hands, and look into your pretty eyes..", emoji: "✨", image: "seven.png" },
-  { text: "So now I've got a question for you…", emoji: "✨", image: "six.png" },
+  { text: "I look forward to when I'll see you again, hold your hands, and look into your pretty eyes..", emoji: "💖", image: "seven.png" },
+  { text: "So now I've got a question for you…", emoji: "🌹", image: "six.png" },
 ];
 
-const galleryImages = ["1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg", "6.jpg", "7.jpg", "8.jpg", "9.jpg", "9.jpg", "10.jpg", "11.jpg"];
+const galleryImages = ["1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg", "6.jpg", "7.jpg", "8.jpg", "9.jpg", "9.jpg", "10.jpg", "11.jpg", "12.jpg", "13.jpg", "14.jpg", "15.jpg", "16.jpg"];
 
 export default function Valentine() {
   const [step, setStep] = useState(0);
@@ -19,19 +19,13 @@ export default function Valentine() {
   const [galleryIndex, setGalleryIndex] = useState(0);
   const [audio, setAudio] = useState(null);
   const [raining, setRaining] = useState(false);
+  const [started, setStarted] = useState(false); // New state to track if the experience has started
 
   useEffect(() => {
-    // Auto-play first song
-    const bgMusic = new Audio('/song.mp3');
-    bgMusic.loop = true;
-    bgMusic.play().catch(err => console.log("Autoplay blocked:", err));
-    setAudio(bgMusic);
-
-    return () => {
-      bgMusic.pause();
-      bgMusic.currentTime = 0; // Reset on unmount
-    };
-  }, []);
+    if (started && audio) {
+      audio.play().catch(err => console.log("Autoplay blocked:", err));
+    }
+  }, [started, audio]);
 
   useEffect(() => {
     if (loading) {
@@ -84,12 +78,29 @@ export default function Valentine() {
         rose.remove();
       }, 5000);
     }, 300);
+  };
 
+  const handleStartClick = () => {
+    const bgMusic = new Audio('/song.mp3');
+    bgMusic.loop = true;
+    setAudio(bgMusic);
+    setStarted(true); // Set started to true to trigger the useEffect for playing audio
   };
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen text-center px-6">
-      {showGallery ? (
+      {!started ? (
+        <div className="flex flex-col items-center justify-center min-h-[80vh]">
+          {/* <h1 className="text-primary mb-4">Touch Me to Begin </h1> */}
+          <motion.button
+            onClick={handleStartClick}
+            className="button-primary"
+            whileHover={{ scale: 1.05 }}
+          >
+            Touch Me 💖
+          </motion.button>
+        </div>
+      ) : showGallery ? (
         <div>
           <h1 className="text-primary animate-fade-in mb-4">Happy Valentine's! 💖</h1>
           <motion.img
