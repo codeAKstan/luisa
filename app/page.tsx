@@ -100,7 +100,7 @@ export default function Valentine() {
         </div>
       ) : showGallery ? (
         <div>
-          <h1 className="text-primary animate-fade-in mb-4">Happy Valentine's! 💖</h1>
+          <h1 className="text-primary animate-fade-in mb-4">Happy Valentine&apos;s! 💖</h1>
           <motion.img
             key={galleryIndex}
             src={`/${galleryImages[galleryIndex]}`}
