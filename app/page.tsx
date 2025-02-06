@@ -17,8 +17,8 @@ export default function Valentine() {
   const [loading, setLoading] = useState(false);
   const [showGallery, setShowGallery] = useState(false);
   const [galleryIndex, setGalleryIndex] = useState(0);
-  const [audio, setAudio] = useState(null);
-  const [started, setStarted] = useState(false); // New state to track if the experience has started
+  const [audio, setAudio] = useState<HTMLAudioElement | null>(null); // Fix: Properly type the audio state
+  const [started, setStarted] = useState(false);
 
   useEffect(() => {
     if (started && audio) {
@@ -100,7 +100,7 @@ export default function Valentine() {
         </div>
       ) : showGallery ? (
         <div>
-          <h1 className="text-primary animate-fade-in mb-4">Happy Valentine&apos;s! 💖</h1>
+          <h1 className="text-primary animate-fade-in mb-4">Happy Valentine's! 💖</h1>
           <motion.img
             key={galleryIndex}
             src={`/${galleryImages[galleryIndex]}`}
