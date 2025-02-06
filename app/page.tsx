@@ -18,10 +18,11 @@ export default function Valentine() {
   const [showGallery, setShowGallery] = useState(false);
   const [galleryIndex, setGalleryIndex] = useState(0);
   const [audio, setAudio] = useState(null);
+  const [raining, setRaining] = useState(false);
 
   useEffect(() => {
     // Auto-play first song
-    const bgMusic = new Audio('/new-song.mp3');
+    const bgMusic = new Audio('/song.mp3');
     bgMusic.loop = true;
     bgMusic.play().catch(err => console.log("Autoplay blocked:", err));
     setAudio(bgMusic);
@@ -53,12 +54,37 @@ export default function Valentine() {
 
   const handleYesClick = () => {
     setLoading(true);
+    setRaining(true);
     if (audio) {
       audio.pause(); // Stop first song
     }
-    const newMusic = new Audio('/song.mp3'); // Play new song
+    const newMusic = new Audio('/new-song.mp3'); // Play new song
     newMusic.play().catch(err => console.log("Autoplay blocked:", err));
     setAudio(newMusic);
+
+    // Start raining effect
+    const rainInterval = setInterval(() => {
+      const heart = document.createElement('div');
+      heart.className = 'heart';
+      heart.innerHTML = '❤️';
+      heart.style.left = `${Math.random() * 100}vw`;
+      heart.style.animationDuration = `${Math.random() * 3 + 2}s`;
+      document.body.appendChild(heart);
+
+      const rose = document.createElement('div');
+      rose.className = 'rose';
+      rose.innerHTML = '🌹';
+      rose.style.left = `${Math.random() * 100}vw`;
+      rose.style.animationDuration = `${Math.random() * 3 + 2}s`;
+      document.body.appendChild(rose);
+
+      // Remove elements after animation ends
+      setTimeout(() => {
+        heart.remove();
+        rose.remove();
+      }, 5000);
+    }, 300);
+
   };
 
   return (

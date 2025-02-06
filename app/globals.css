@@ -105,3 +105,32 @@ body {
     font-size: 1rem;
   }
 }
+
+/* styles.css */
+@keyframes fall {
+  0% {
+    transform: translateY(-10vh) rotate(0deg);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(100vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+.heart,
+.rose {
+  position: absolute;
+  top: -10vh;
+  font-size: 24px;
+  animation: fall linear infinite;
+}
+
+.heart {
+  color: red;
+}
+
+.rose {
+  color: pink;
+}
