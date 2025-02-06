@@ -18,7 +18,6 @@ export default function Valentine() {
   const [showGallery, setShowGallery] = useState(false);
   const [galleryIndex, setGalleryIndex] = useState(0);
   const [audio, setAudio] = useState(null);
-  const [raining, setRaining] = useState(false);
   const [started, setStarted] = useState(false); // New state to track if the experience has started
 
   useEffect(() => {
@@ -48,7 +47,6 @@ export default function Valentine() {
 
   const handleYesClick = () => {
     setLoading(true);
-    setRaining(true);
     if (audio) {
       audio.pause(); // Stop the first song
     }
@@ -58,7 +56,7 @@ export default function Valentine() {
     setAudio(newMusic);
 
     // Start raining effect
-    const rainInterval = setInterval(() => {
+    setInterval(() => {
       const heart = document.createElement('div');
       heart.className = 'heart';
       heart.innerHTML = '❤️';
@@ -92,7 +90,6 @@ export default function Valentine() {
     <div className="flex flex-col items-center justify-center min-h-screen text-center px-6">
       {!started ? (
         <div className="flex flex-col items-center justify-center min-h-[80vh]">
-          {/* <h1 className="text-primary mb-4">Touch Me to Begin </h1> */}
           <motion.button
             onClick={handleStartClick}
             className="button-primary"
