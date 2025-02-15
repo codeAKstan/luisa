@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 
+
 const messages = [
   { text: "Heyyyyy, pretty girl.", emoji: "👋", image: "one.png" },
   { text: "Recently, we met. And somehow, you've been on my mind ever since.", emoji: "📅", image: "two.png" },
